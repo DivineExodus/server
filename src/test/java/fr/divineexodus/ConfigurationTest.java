@@ -33,7 +33,8 @@ class ConfigurationTest {
         Config config = Config.inMemory();
         config.set("server.ip", "domain.tld");
         config.set("server.port", 65536);
-        assertThrows(InvalidValueException.class, () -> new ObjectConverter().toObject(config, Configuration::new));
+        ObjectConverter converter = new ObjectConverter();
+        assertThrows(InvalidValueException.class, () -> converter.toObject(config, Configuration::new));
     }
 
     @Test
@@ -41,6 +42,7 @@ class ConfigurationTest {
         Config config = Config.inMemory();
         config.set("server.ip", "127.0.0.1");
         config.set("server.port", -1);
-        assertThrows(InvalidValueException.class, () -> new ObjectConverter().toObject(config, Configuration::new));
+        ObjectConverter converter = new ObjectConverter();
+        assertThrows(InvalidValueException.class, () -> converter.toObject(config, Configuration::new));
     }
 }

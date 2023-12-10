@@ -1,10 +1,16 @@
 plugins {
     id("java")
+    id("application")
     id("org.sonarqube") version "4.4.1.3373"
+    id("jacoco-report-aggregation")
 }
 
 group = "fr.divineexodus"
 version = "1.0-SNAPSHOT"
+
+application {
+    mainClass.set("fr.divineexodus.DivineExodus")
+}
 
 repositories {
     mavenCentral()
@@ -32,4 +38,16 @@ sonar {
     properties {
         property("sonar.projectKey", "DivineExodus_server_AYxTmxkxY2D0l8qiaVAK")
     }
+}
+
+tasks.jacocoTestReport {
+    reports {
+        xml.required = true
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir("jacocoHtml")
+    }
+}
+
+tasks.check {
+    dependsOn(tasks.named<JacocoReport>("testCodeCoverageReport"))
 }

@@ -27,7 +27,7 @@ public class Configuration {
     public static class IpValidator implements Predicate<Object> {
         @Override
         public boolean test(Object o) {
-            return o instanceof String ip && ip.matches("^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$");
+            return o instanceof String ip && ip.matches("^(?:\\d{1,3}\\.){3}\\d{1,3}$");
         }
     }
     // endregion
