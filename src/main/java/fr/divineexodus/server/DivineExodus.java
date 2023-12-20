@@ -34,6 +34,12 @@ public class DivineExodus {
         DivineExodus.CONFIG_FILE.load();
         DivineExodus.CONFIG = new ObjectConverter().toObject(DivineExodus.CONFIG_FILE, Configuration::new);
         LOGGER.info("Configuration loaded");
+
+        LOGGER.info("Starting Minecraft Server");
+        MinecraftServer minecraftServer = MinecraftServer.init();
+        minecraftServer.start(CONFIG.getServerIp(), CONFIG.getServerPort());
+
+        LOGGER.info("Minecraft Server started on {}:{}", CONFIG.getServerIp(), CONFIG.getServerPort());
     }
 
     public static void main(String[] args) {
