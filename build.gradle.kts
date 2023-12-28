@@ -24,6 +24,14 @@ dependencies {
     // Configuration
     implementation("com.electronwill.night-config:toml:3.6.0")
 
+    // Monitoring
+    implementation("io.prometheus:prometheus-metrics-core:1.0.0")
+    implementation("io.prometheus:prometheus-metrics-instrumentation-jvm:1.0.0")
+    implementation("io.prometheus:prometheus-metrics-exporter-httpserver:1.0.0")
+
+    // Logger
+    implementation("org.slf4j:slf4j-simple:2.0.7")
+
     // Testing
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
