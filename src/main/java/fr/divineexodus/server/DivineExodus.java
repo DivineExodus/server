@@ -3,9 +3,11 @@ package fr.divineexodus.server;
 import com.electronwill.nightconfig.core.conversion.ObjectConverter;
 import com.electronwill.nightconfig.core.file.FileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
+import fr.divineexodus.server.monitor.Monitor;
 import net.minestom.server.MinecraftServer;
 import org.slf4j.Logger;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 public class DivineExodus {
@@ -37,6 +39,15 @@ public class DivineExodus {
 
         LOGGER.info("Starting Minecraft Server");
         MinecraftServer minecraftServer = MinecraftServer.init();
+
+        LOGGER.info("Starting Monitor");
+        try {
+            Monitor.init();
+            LOGGER.info("Monitor started");
+        } catch (IOException e) {
+            LOGGER.error("Monitor failed to start, skipping it...", e);
+        }
+
         minecraftServer.start(CONFIG.getServerIp(), CONFIG.getServerPort());
 
         LOGGER.info("Minecraft Server started on {}:{}", CONFIG.getServerIp(), CONFIG.getServerPort());
